@@ -1,0 +1,52 @@
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="brand" href="#accueil">
+      <span class="brand__logo" aria-hidden="true">
+        <svg class="icon" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>
+      </span>
+      <span class="brand__name">Sarra Afli </span>
+      <span class="brand__status"><span class="dot"></span> Open to work</span>
+    </a>
+
+    <nav class="menu" aria-label="Navigation principale">
+      @for (l of links; track l.id) {
+        <a [href]="'#' + l.id" [class.is-active]="active() === l.id"
+           [attr.aria-current]="active() === l.id ? 'true' : null">{{ l.label }}</a>
+      }
+    </nav>
+
+    <div class="nav__actions">
+      <a class="icon-btn" href="https://github.com/sarraafli" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg class="icon" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </a>
+      <a class="icon-btn" href="https://www.linkedin.com/in/sarra-afli-403862228/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+      </a>
+      <span class="avatar" aria-hidden="true">SA</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <app-accueil />
+  <app-projets />
+  <app-parcours />
+  <app-contact />
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <p class="footer__name">Sarra Afli <span class="badge">Junior SWE</span></p>
+      <p class="footer__stack">Python • FastAPI • TypeScript • Modern Reactive Web</p>
+    </div>
+
+    <nav class="footer__links" aria-label="Pied de page">
+      <a href="#projets">Projets</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+  
+  </div>
+</footer>

@@ -1,0 +1,46 @@
+<section id="accueil" class="hero container">
+  <!-- Colonne gauche -->
+  <div class="hero__content">
+   
+
+    
+    <h1 class="hero__title">Sarra Afli</h1>
+<p class="hero__subtitle">Ingénieure Logiciel | Développement Full Stack & IA</p>
+
+<p class="hero__text">
+  Ingénieure en Génie Logiciel spécialisée dans le développement d’applications
+  web Full Stack et l’intégration de solutions basées sur l’Intelligence
+  Artificielle. Je conçois des applications modernes, fiables et évolutives,
+  en combinant développement logiciel, automatisation et technologies d’IA.
+</p>
+
+
+
+
+    <div class="hero__actions">
+      <a class="btn btn-primary" [href]="cvUrl" download>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        Télécharger mon CV (PDF)
+      </a>
+      <a class="btn" href="#contact">
+        <svg class="icon" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Me contacter
+      </a>
+    
+    </div>
+
+    
+  </div>
+
+  <!-- Colonne droite -->
+  <div class="hero__photo">
+    <div class="photo-frame">
+      @if (!photoError) {
+        <img [src]="photoUrl" alt="Photo de Sarra Afli" (error)="photoError = true" />
+      } @else {
+        <span class="photo-frame__placeholder">SA</span>
+      }
+    </div>
+  </div>
+
+</section>

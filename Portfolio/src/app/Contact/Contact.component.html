@@ -1,0 +1,109 @@
+<section id="contact" class="section">
+  <div class="container layout">
+    <!-- Colonne gauche -->
+    <div class="info">
+      <p class="eyebrow">// Disponibilité &amp; recrutement</p>
+      <h2 class="section-title">
+        Discutons de votre projet.<br />
+        <span class="accent">Je réponds sous 24 h.</span>
+      </h2>
+      <p class="info__lead">
+        À l'écoute d'opportunités en <strong>CDI</strong> ou
+        <strong>alternance de fin d'études</strong> en tant que Junior Software Engineer
+        Backend / Fullstack.
+      </p>
+
+      <!-- Infos clés en un coup d'œil -->
+      <ul class="pills">
+        <li class="pill"><span class="dot"></span>{{ availability }}</li>
+        <li class="pill">Tunis · hybride / remote</li>
+        <li class="pill">Angular · FastAPI · IA</li>
+      </ul>
+
+      <!-- Action principale -->
+      <a class="card cta" [href]="bookingUrl" target="_blank" rel="noopener">
+        <div>
+          <small>Le plus rapide</small>
+          <strong>Réserver un échange de 15 min</strong>
+          <span>Échange technique via Google Meet, sans engagement.</span>
+        </div>
+        <span class="cta__go">Choisir un créneau →</span>
+      </a>
+
+      <!-- Contacts directs -->
+      <div class="direct">
+        <div class="card copy">
+          <span>{{ email }}</span>
+          <button type="button" class="copy__btn" (click)="copyEmail()">
+            {{ copied() ? 'Copié ✓' : 'Copier' }}
+          </button>
+        </div>
+        <a class="card link" [href]="linkedinUrl" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="card link" [href]="githubUrl" target="_blank" rel="noopener">GitHub</a>
+        <a class="card link" [href]="phoneHref">📞 {{ phone }}</a>
+        <a class="card link link--wa" [href]="whatsappUrl" target="_blank" rel="noopener">💬 WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- Formulaire -->
+    <form class="card form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <h3 class="form__title">Ou écrivez-moi directement</h3>
+
+      <div class="form__row">
+        <div class="field">
+          <label for="name">Nom &amp; Entreprise *</label>
+          <input id="name" type="text" formControlName="name" placeholder="Ex: Sophie Laurent • Acme Corp"
+                 [class.is-invalid]="invalid('name')" />
+          @if (invalid('name')) { <small>Indiquez votre nom.</small> }
+        </div>
+        <div class="field">
+          <label for="email">Adresse email pro *</label>
+          <input id="email" type="email" formControlName="email" [placeholder]="emailPlaceholder"
+                 [class.is-invalid]="invalid('email')" />
+          @if (invalid('email')) { <small>Entrez une adresse email valide.</small> }
+        </div>
+      </div>
+
+      <!-- Objet : choix en un clic -->
+      <div class="field">
+        <span class="label">Vous proposez</span>
+        <div class="seg" role="radiogroup" aria-label="Objet de l'échange">
+          @for (s of subjects; track s.value) {
+            <button type="button" role="radio" class="seg__btn"
+                    [class.on]="form.controls.subject.value === s.value"
+                    [attr.aria-checked]="form.controls.subject.value === s.value"
+                    (click)="form.controls.subject.setValue(s.value)">
+              {{ s.label }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="message">Message *</label>
+        <textarea id="message" rows="5" formControlName="message"
+                  placeholder="Parlez-moi de votre équipe, de votre stack ou de votre proposition..."
+                  [class.is-invalid]="invalid('message')"></textarea>
+        @if (invalid('message')) { <small>Écrivez au moins 10 caractères.</small> }
+      </div>
+
+      <div class="form__foot">
+        <p class="privacy">
+          <svg class="icon" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Vos coordonnées restent confidentielles.
+        </p>
+        <button type="submit" class="btn btn-primary" [disabled]="sending()">
+          <svg class="icon" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+          {{ sending() ? 'Envoi en cours…' : 'Envoyer le message' }}
+        </button>
+      </div>
+
+      @if (sent()) {
+        <p class="form__success" role="status">Message envoyé ✓ Je vous réponds sous 24 heures ouvrées.</p>
+      }
+      @if (error()) {
+        <p class="form__error" role="alert">{{ error() }}</p>
+      }
+    </form>
+  </div>
+</section>

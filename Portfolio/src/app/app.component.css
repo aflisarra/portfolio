@@ -1,0 +1,63 @@
+:host { display: block; min-height: 100vh; }
+
+/* ---------- Navbar ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(11, 11, 13, 0.82);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; }
+
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand__logo {
+  display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px;
+  background: var(--surface-2); border: 1px solid var(--border-strong); color: var(--accent);
+}
+.brand__name { font-size: 13px; font-weight: 600; }
+.brand__status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font: 400 10px/1 var(--font-mono); color: var(--text-muted);
+  padding: 5px 8px; border-radius: 999px;
+  border: 1px solid var(--border-strong); background: var(--surface);
+}
+
+.menu {
+  display: flex; gap: 4px; padding: 4px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+}
+.menu a {
+  padding: 6px 14px; border-radius: 7px;
+  font-size: 12px; font-weight: 500; color: var(--text-muted);
+  transition: color .15s, background .15s;
+}
+.menu a:hover { color: var(--text); }
+.menu a.is-active { background: var(--surface-2); color: var(--text); box-shadow: inset 0 0 0 1px var(--border-strong); }
+
+.nav__actions { display: flex; align-items: center; gap: 8px; }
+.nav__actions .icon-btn { width: 32px; height: 32px; border-radius: 8px; }
+.avatar {
+  display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%;
+  font-size: 11px; font-weight: 700; color: var(--accent-ink);
+  background: linear-gradient(135deg, var(--accent), #8fb2ff);
+}
+
+/* ---------- Footer ---------- */
+.footer { border-top: 1px solid var(--border); background: var(--surface); }
+.footer__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap; padding-block: 32px;
+}
+.footer__name { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; }
+.footer__stack { font: 400 11px/1.6 var(--font-mono); color: var(--text-muted); margin-top: 4px; }
+.footer__links { display: flex; gap: 24px; font-size: 11px; color: var(--text-muted); }
+.footer__links a:hover { color: var(--text); }
+.footer__copy { font-size: 11px; color: var(--text-dim); }
+
+@media (max-width: 760px) {
+  .brand__status, .nav__actions .icon-btn { display: none; }
+  .menu a { padding: 6px 10px; }
+}
+@media (max-width: 520px) {
+  .brand__name { display: none; }
+}
