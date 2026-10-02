@@ -17,9 +17,8 @@ interface SkillGroup {
 @Component({
   selector: 'app-parcours',
   standalone: true,
-  templateUrl: './parcours.component.html',
-  styleUrl: './parcours.component.css',
-})
+  templateUrl: './Parcours.component.html',
+  styleUrl: './Parcours.component.css',})
 export class ParcoursComponent {
   readonly groups: SkillGroup[] = [
     {

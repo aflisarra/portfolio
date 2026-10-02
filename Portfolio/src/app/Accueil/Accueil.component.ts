@@ -8,8 +8,8 @@ interface Stat {
 @Component({
   selector: 'app-accueil',
   standalone: true,
-  templateUrl: './accueil.component.html',
-  styleUrl: './accueil.component.css',
+  templateUrl: './Accueil.component.html',
+  styleUrl: './Accueil.component.css',
 })
 export class AccueilComponent {
   readonly cvUrl = '/assets/cvsarraafli (2).pdf';

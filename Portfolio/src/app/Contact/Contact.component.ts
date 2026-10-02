@@ -1,13 +1,13 @@
-import { Component, inject, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './contact.component.html',
-  styleUrl: './contact.component.css',
+  templateUrl: './Contact.component.html',
+  styleUrl: './Contact.component.css',
 })
 export class ContactComponent {
   private readonly fb = inject(FormBuilder);
