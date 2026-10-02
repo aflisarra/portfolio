@@ -1,18 +1,6 @@
+const { Resend } = require('resend');
 
-const nodemailer = require('nodemailer');
-
-// Transporteur Gmail avec IPv4
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
-  },
-  family: 4,
-  connectionTimeout: 20000,
-  greetingTimeout: 20000,
-  socketTimeout: 20000,
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Échappe le HTML pour éviter l'injection
 const escapeHtml = (str) =>
@@ -23,39 +11,56 @@ const escapeHtml = (str) =>
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
 
-/**
- * Envoie le message du formulaire de contact.
- */
 async function sendContactMessage({ name, email, subject, message }) {
-  console.log('MAIL_USER présent :', !!process.env.MAIL_USER);
-  console.log('MAIL_PASS présent :', !!process.env.MAIL_PASS);
+  console.log('RESEND_API_KEY présente :', !!process.env.RESEND_API_KEY);
   console.log('MAIL_TO présent :', !!process.env.MAIL_TO);
 
-  if (!process.env.MAIL_USER || !process.env.MAIL_PASS) {
-    throw new Error('MAIL_USER / MAIL_PASS manquants');
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error('RESEND_API_KEY manquante');
   }
 
   const to = process.env.MAIL_TO || 'aflisarra19@gmail.com';
 
   const html = `
     <h2>Nouveau message depuis le portfolio</h2>
+
     <p><strong>Objet :</strong> ${escapeHtml(subject)}</p>
-    <p><strong>Nom &amp; entreprise :</strong> ${escapeHtml(name)}</p>
-    <p><strong>Email :</strong>
-      <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>
+
+    <p>
+      <strong>Nom &amp; entreprise :</strong>
+      ${escapeHtml(name)}
     </p>
+
+    <p>
+      <strong>Email :</strong>
+      <a href="mailto:${escapeHtml(email)}">
+        ${escapeHtml(email)}
+      </a>
+    </p>
+
     <hr />
-    <p style="white-space: pre-line">${escapeHtml(message)}</p>
+
+    <p style="white-space: pre-line">
+      ${escapeHtml(message)}
+    </p>
   `;
 
-  return transporter.sendMail({
-    from: `"Portfolio – ${name.replace(/["\r\n]/g, '')}" <${process.env.MAIL_USER}>`,
-    to,
+  const { data, error } = await resend.emails.send({
+    from: 'Portfolio <onboarding@resend.dev>',
+    to: [to],
     replyTo: email,
     subject: `[Portfolio] ${subject.replace(/[\r\n]/g, ' ')}`,
-    text: `Objet : ${subject}\nNom & entreprise : ${name}\nEmail : ${email}\n\n${message}`,
     html,
   });
+
+  if (error) {
+    console.error('Erreur Resend :', error);
+    throw new Error(error.message || 'Erreur lors de l’envoi de l’email');
+  }
+
+  console.log('Email envoyé avec succès :', data?.id);
+
+  return data;
 }
 
 module.exports = { sendContactMessage };
