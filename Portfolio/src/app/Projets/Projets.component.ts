@@ -69,7 +69,7 @@ export class ProjetsComponent {
     repoUrl: 'https://github.com/aflisarra/testFlow',
     media: [
       // Fichiers dans public/projets/testflow/
-      { type: 'video', src: 'projets/testflow/merged-video-cut.mp4' },
+      
       { type: 'image', src: 'projets/testflow/analyse.png' },
       { type: 'image', src: 'projets/testflow/dashboard.png' },
       { type: 'image', src: 'projets/testflow/interfaceuser (1).png' },
