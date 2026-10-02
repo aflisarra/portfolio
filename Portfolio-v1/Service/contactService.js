@@ -27,6 +27,9 @@ const escapeHtml = (str) =>
  * @param {{ name: string, email: string, subject: string, message: string }} data
  */
 async function sendContactMessage({ name, email, subject, message }) {
+    console.log('MAIL_USER présent :', !!process.env.MAIL_USER);
+  console.log('MAIL_PASS présent :', !!process.env.MAIL_PASS);
+  console.log('MAIL_TO présent :', !!process.env.MAIL_TO);
   if (!process.env.MAIL_USER || !process.env.MAIL_PASS) {
     throw new Error('MAIL_USER / MAIL_PASS manquants dans le fichier .env');
   }
