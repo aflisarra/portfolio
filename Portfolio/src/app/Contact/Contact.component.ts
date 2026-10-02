@@ -12,7 +12,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 export class ContactComponent {
   private readonly fb = inject(FormBuilder);
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:3000/api/contact';
+  private readonly apiUrl = 'https://portfolio-api-6ilo.onrender.com/api/contact';
 
   // ⚠️ À remplacer par VOS vraies informations
   readonly email = 'aflisarra19@gmail.com';
