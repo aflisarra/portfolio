@@ -4,8 +4,7 @@
       <div>
         <h2 class="section-title">Projets Récents &amp; Réalisations Techniques</h2>
         <p class="section-desc">
-          Conçus selon les standards de l'ingénierie logicielle : typage rigoureux,
-          observabilité, latence minimale et isolation des responsabilités.
+          Des projets développés avec une approche structurée, en privilégiant la qualité du code, la performance et la maintenabilité.
         </p>
       </div>
       <a class="btn" href="#contact">
@@ -27,9 +26,20 @@
                 <span class="version">{{ project.version }}</span>
               </div>
               <div class="project__links">
-                <a class="icon-btn" [href]="project.repoUrl" target="_blank" rel="noopener" aria-label="Code source">
-                  <svg class="icon" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 9h6v6"/><path d="m9 15 6-6"/></svg>
-                </a>
+                @if (project.backendRepoUrl && project.frontendRepoUrl) {
+                  <a class="project__repo-link" [href]="project.backendRepoUrl" target="_blank" rel="noopener noreferrer">
+                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.08c-3.1.67-3.76-1.32-3.76-1.32-.5-1.29-1.24-1.63-1.24-1.63-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.71 2.62 1.22 3.26.93.1-.72.39-1.22.71-1.5-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.15a10.6 10.6 0 0 1 5.55 0c2.11-1.45 3.05-1.15 3.05-1.15.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.29-2.61 5.23-5.1 5.51.4.35.76 1.03.76 2.08v3.06c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
+                    Backend
+                  </a>
+                  <a class="project__repo-link" [href]="project.frontendRepoUrl" target="_blank" rel="noopener noreferrer">
+                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.08c-3.1.67-3.76-1.32-3.76-1.32-.5-1.29-1.24-1.63-1.24-1.63-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.71 2.62 1.22 3.26.93.1-.72.39-1.22.71-1.5-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.15a10.6 10.6 0 0 1 5.55 0c2.11-1.45 3.05-1.15 3.05-1.15.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.29-2.61 5.23-5.1 5.51.4.35.76 1.03.76 2.08v3.06c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
+                    Frontend
+                  </a>
+                } @else if (project.repoUrl) {
+                  <a class="icon-btn" [href]="project.repoUrl" target="_blank" rel="noopener noreferrer" aria-label="Code source">
+                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.08c-3.1.67-3.76-1.32-3.76-1.32-.5-1.29-1.24-1.63-1.24-1.63-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.71 2.62 1.22 3.26.93.1-.72.39-1.22.71-1.5-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.15a10.6 10.6 0 0 1 5.55 0c2.11-1.45 3.05-1.15 3.05-1.15.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.29-2.61 5.23-5.1 5.51.4.35.76 1.03.76 2.08v3.06c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
+                  </a>
+                }
                 <a class="icon-btn is-active" [href]="project.demoUrl" aria-label="Voir la démo">
                   <svg class="icon" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
                 </a>
@@ -40,8 +50,14 @@
             <p class="project__summary">{{ project.summary }}</p>
 
             <div class="tags">
-              @for (t of project.tags.slice(0, 6); track t) { <span class="tag">{{ t }}</span> }
-              @if (project.tags.length > 6) { <span class="tag tag--more">+{{ project.tags.length - 6 }}</span> }
+              @for (t of (showAllTags(project.title) ? project.tags : project.tags.slice(0, 6)); track t) { <span class="tag">{{ t }}</span> }
+              @if (project.tags.length > 6) {
+                <button type="button" class="tag tag--more" (click)="toggleTags(project.title)"
+                        [attr.aria-expanded]="showAllTags(project.title)"
+                        [attr.aria-label]="showAllTags(project.title) ? 'Masquer les tags supplémentaires' : 'Afficher tous les tags'">
+                  {{ showAllTags(project.title) ? '−' : '+' + (project.tags.length - 6) }}
+                </button>
+              }
             </div>
 
             <button type="button" class="more" (click)="toggle(project.title)"

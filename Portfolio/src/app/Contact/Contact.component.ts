@@ -21,7 +21,7 @@ export class ContactComponent {
   readonly phoneHref = 'tel:+21625091333';            // sans espaces
   readonly whatsappUrl = 'https://wa.me/21625091333'; // format international, sans + ni espaces
   readonly availability = 'Disponible dès octobre 2026';
-  readonly bookingUrl = 'https://calendly.com/votre-lien'; // ou lien Google Calendar
+  readonly bookingUrl = 'https://calendly.com/aflisarra19/new-meeting'; // ou lien Google Calendar
   readonly linkedinUrl = 'https://www.linkedin.com/in/sarra-afli-403862228/';
   readonly githubUrl = 'https://github.com/aflisarra';
 

@@ -13,7 +13,7 @@ interface Stat {
 })
 export class AccueilComponent {
   readonly cvUrl = '/assets/cvsarraafli (2).pdf';
-  readonly photoUrl = '/assets/photo.jpg';
+  readonly photoUrl = '/assets/photo_sans_fond.png';
   photoError = false;
 
   readonly stats: Stat[] = [

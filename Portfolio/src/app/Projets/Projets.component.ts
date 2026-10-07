@@ -19,7 +19,9 @@ interface Project {
   metrics: Metric[];
   tags: string[];
   status: string;
-  repoUrl: string;
+  repoUrl?: string;
+  backendRepoUrl?: string;
+  frontendRepoUrl?: string;
   media: MediaItem[];
   demoUrl: string;
 }
@@ -32,25 +34,24 @@ interface Project {
 })
 export class ProjetsComponent {
   readonly featured: Project = {
-    badge: 'Projet phare • IA & Automatisation des tests',
+    badge: 'Projet phare • IA & tests automatisés',
     version: 'PFE 2026',
-    title: 'TestFlow – Plateforme intelligente de tests automatisés avec IA générative',
+    title: 'TestFlow – Tests web automatisés avec une IA locale',
     summary:
-      "Plateforme qui génère, exécute et analyse automatiquement des tests web (Selenium) grâce à l'IA générative.",
+      "Une plateforme qui lit un cahier des charges, génère les cas de test, les exécute avec Selenium et explique pourquoi un test échoue.",
     description: `
       <ul>
-        <li>Plateforme web intelligente permettant de <strong>générer, organiser et exécuter automatiquement des scénarios de test</strong> à partir de spécifications.</li>
-        <li>Intégration d’une <strong>IA générative</strong> pour analyser les spécifications et générer des plans, scénarios et cas de test structurés.</li>
-        <li>Automatisation des tests web avec <strong>Selenium</strong>, basée sur des actions générées dynamiquement à partir du DOM de l’application.</li>
-        <li>Mise en place d’un <strong>moteur d’interprétation des actions</strong> permettant de traduire les décisions de l’IA en interactions Selenium exécutables, avec des mécanismes de <strong>fallback</strong> en cas d’échec.</li>
-        <li>Analyse par IA des <strong>échecs d’exécution</strong> afin d’identifier les causes des problèmes et de proposer des actions correctives.</li>
-        <li>Mise en place d’un système de <strong>traçabilité</strong> avec enregistrement des logs, des résultats d’exécution et des <strong>captures d’écran à chaque étape</strong>.</li>
-        <li>Développement Full Stack avec <strong>Angular, Node.js/Express, Python/FastAPI et MongoDB</strong>, avec intégration d’un moteur d’IA.</li>
-        <li><strong>Conteneurisation et orchestration</strong> de l’ensemble de la plateforme avec <strong>Docker</strong>.</li>
+        <li>Plateforme web qui <strong>génère, organise et exécute des scénarios de test</strong> à partir d’une spécification (.docx).</li>
+        <li>Pipeline en trois phases : extraction du texte de la spécification, génération d’un <strong>plan de test (JSON) validé par le testeur</strong>, puis production des cas de test avec leurs étapes et leurs données.</li>
+        <li>Pendant l’exécution, l’IA choisit chaque action à partir de l’étape courante et du <strong>DOM</strong> de la page. Un <strong>moteur d’interprétation</strong> la transforme en action Selenium, avec des <strong>fallbacks</strong> quand un sélecteur ne répond plus.</li>
+        <li>En cas d’échec, l’IA analyse les logs, le DOM final et l’étape fautive pour proposer une <strong>cause probable et un correctif</strong> dans un rapport.</li>
+        <li>Modèle <strong>Qwen 2.5 servi en local avec Ollama</strong> : les données restent en interne et il n’y a aucun coût d’API. Je travaille sur le compromis entre qualité et temps de réponse, notamment grâce à une extraction ciblée du texte de la spécification.</li>
+        <li><strong>Traçabilité</strong> complète : logs, résultats et capture d’écran à chaque étape.</li>
+        <li>Stack : <strong>Angular, Node.js / Express, FastAPI et MongoDB</strong>, le tout conteneurisé avec <strong>Docker</strong>.</li>
       </ul>
     `,
     metrics: [
-      { label: 'IA', value: 'Générative' },
+      { label: 'IA', value: 'Ollama • Qwen 2.5' },
       { label: 'Automatisation', value: 'Selenium' },
       { label: 'Traçabilité', value: 'Logs & captures' },
     ],
@@ -58,18 +59,18 @@ export class ProjetsComponent {
       'Angular',
       'Node.js',
       'Express',
-      'Python',
       'FastAPI',
-      'Selenium',
+      'Python',
       'MongoDB',
+      'Selenium',
+      'Ollama',
+      'Qwen 2.5',
       'Docker',
-      'IA générative',
     ],
-    status: 'IA • Selenium • Fallbacks • Analyse des échecs',
-    repoUrl: 'https://github.com/aflisarra/testFlow',
+    status: 'IA locale • Selenium • Fallbacks • Analyse des échecs',
+    repoUrl: 'https://github.com/aflisarra/testFlow/tree/feature/dashboard-change-password',
     media: [
       // Fichiers dans public/projets/testflow/
-      
       { type: 'image', src: 'projets/testflow/analyse.png' },
       { type: 'image', src: 'projets/testflow/dashboard.png' },
       { type: 'image', src: 'projets/testflow/interfaceuser (1).png' },
@@ -81,16 +82,16 @@ export class ProjetsComponent {
   readonly featured2: Project = {
     badge: 'Projet • Gestion d’événements',
     version: 'Projet académique 2025',
-    title: 'SmartMeet – Plateforme intelligente de gestion de réunions',
+    title: 'SmartMeet – Plateforme collaborative de gestion d’événements',
     summary:
-      "Application collaborative de gestion d'événements (présentiel, live, stories) avec analyse des émotions et chatbot.",
+      "Application pour créer et suivre des événements en présentiel ou en ligne, avec lives, stories, analyse des émotions et chatbot.",
     description: `
       <ul>
-        <li>Application web collaborative développée avec <strong>Spring Boot et Angular</strong>, permettant de créer et gérer des événements <strong>en présentiel ou en ligne</strong>.</li>
-        <li>Organisation d’événements avec possibilité de suivre les événements <strong>en direct (Live)</strong> et de partager des <strong>stories</strong> pour favoriser les interactions entre participants.</li>
-        <li>Mise en place d’un espace de <strong>publication et de commentaires</strong>, enrichi par l’<strong>analyse des émotions</strong> et la détection automatique des <strong>mots inappropriés</strong> dans les contenus.</li>
-        <li>Intégration d’un <strong>chatbot intelligent</strong> pour améliorer l’expérience utilisateur et faciliter les interactions autour des événements.</li>
-        <li>Ajout d’un module de <strong>sponsoring</strong> permettant de mettre en avant des événements et de gérer les contenus sponsorisés.</li>
+        <li>Application web collaborative en <strong>Spring Boot et Angular</strong> pour créer et gérer des événements, <strong>en présentiel ou en ligne</strong>.</li>
+        <li>Les participants peuvent suivre un événement <strong>en direct (Live)</strong> et partager des <strong>stories</strong> pour échanger entre eux.</li>
+        <li>Espace de <strong>publications et de commentaires</strong> avec <strong>analyse des émotions</strong> (modèle de Machine Learning entraîné sur un dataset, exposé par une <strong>API Flask</strong>) et détection automatique des <strong>mots inappropriés</strong>.</li>
+        <li><strong>Chatbot</strong> basé sur une <strong>API d’IA</strong> pour guider les utilisateurs autour des événements.</li>
+        <li>Module de <strong>sponsoring</strong> pour mettre des événements en avant et gérer les contenus sponsorisés.</li>
       </ul>
     `,
     metrics: [
@@ -98,10 +99,11 @@ export class ProjetsComponent {
       { label: 'Frontend', value: 'Angular' },
       { label: 'IA', value: 'Émotions & chatbot' },
     ],
-    // ⚠️ Ajoutez ici les autres technologies que vous avez vraiment utilisées (base de données, etc.)
-    tags: ['Angular', 'Spring Boot', 'Chatbot', 'Analyse des émotions', 'Live', 'Sponsoring'],
+    // TODO : ajouter la base de données utilisée (MySQL ? MongoDB ?)
+    tags: ['Spring Boot', 'Angular', 'Flask', 'Machine Learning', 'API d’IA', 'Live', 'Sponsoring'],
     status: 'Événements • Live • Stories • Sponsoring',
-    repoUrl: 'https://github.com/', // ⚠️ à remplacer par le vrai lien de SmartMeet
+    backendRepoUrl: 'https://github.com/aflisarra/smartmeet-back',
+    frontendRepoUrl: 'https://github.com/aflisarra/smartmeet_front',
     media: [
       // Fichiers dans public/projets/smartmeet/
       { type: 'video', src: 'projets/smartmeet/demo.mp4' },
@@ -118,14 +120,14 @@ export class ProjetsComponent {
     version: 'Projet académique',
     title: 'Symphony – Plateforme de gestion des stages',
     summary:
-      'Plateforme web de gestion des stages : candidatures, notifications par e-mail et réclamations.',
+      'Plateforme web pour suivre les stages : candidatures, notifications par e-mail et réclamations.',
     description: `
       <ul>
-        <li>Plateforme web développée avec <strong>Symfony et MySQL</strong> pour gérer les stages et faciliter les échanges entre les différents utilisateurs.</li>
-        <li>Gestion des <strong>stages, candidatures et utilisateurs</strong>, avec des fonctionnalités adaptées aux différents rôles de la plateforme.</li>
-        <li>Automatisation des <strong>notifications et de l’envoi d’e-mails via SMTP</strong> pour informer les utilisateurs des différentes étapes liées à leurs stages.</li>
-        <li>Mise en place d’un système de <strong>réclamations</strong> permettant aux utilisateurs de soumettre et de suivre leurs demandes.</li>
-        <li>Gestion des <strong>profils et des informations des utilisateurs</strong> afin de centraliser les données liées aux stages.</li>
+        <li>Plateforme web en <strong>Symfony et MySQL</strong> qui centralise la gestion des stages et les échanges entre les utilisateurs.</li>
+        <li>Gestion des <strong>stages, des candidatures et des utilisateurs</strong>, avec des fonctionnalités propres à chaque rôle.</li>
+        <li><strong>Notifications et e-mails automatiques via SMTP</strong> à chaque étape importante du parcours d’un stage.</li>
+        <li>Système de <strong>réclamations</strong> : l’utilisateur soumet sa demande et suit son traitement.</li>
+        <li>Gestion des <strong>profils</strong> pour regrouper les informations liées aux stages.</li>
       </ul>
     `,
     metrics: [
@@ -134,8 +136,8 @@ export class ProjetsComponent {
       { label: 'Notifications', value: 'SMTP' },
     ],
     tags: ['Symfony', 'PHP', 'MySQL', 'SMTP'],
-    status: 'Gestion des stages • Candidatures • Réclamations',
-    repoUrl: 'https://github.com/',
+    status: 'Stages • Candidatures • Réclamations',
+    repoUrl: 'https://github.com/aflisarra/Gestion-des-stages', // TODO : lien réel du dépôt
     media: [
       // Fichiers dans public/projets/symphony/
       { type: 'video', src: 'projets/symphony/demo.mp4' },
@@ -144,19 +146,19 @@ export class ProjetsComponent {
   };
 
   readonly restaurant: Project = {
-    badge: 'Projet • Architecture Microservices',
+    badge: 'Projet • Architecture microservices',
     version: 'Projet académique',
-    title: 'Application de gestion de restaurant',
+    title: 'GastroFlow – Gestion de restaurant en microservices',
     summary:
-      'Application de gestion de restaurant en microservices : commandes, stock, réservations et facturation.',
+      'Application de gestion de restaurant découpée en services : commandes, stock, réservations et facturation.',
     description: `
       <ul>
-        <li>Mise en place d’une architecture <strong>microservices</strong> avec un <strong>service commun développé avec Node.js et Angular</strong>, ainsi que plusieurs services métier développés avec <strong>Spring Boot et Angular</strong>.</li>
-        <li>Développement de plusieurs services métier : <strong>service de commandes, service de stockage, service de réservation et service de facturation</strong>.</li>
-        <li>Communication inter-services via <strong>RabbitMQ</strong> et conteneurisation de l’application avec <strong>Docker Desktop</strong>.</li>
-        <li>Utilisation de <strong>Eureka</strong> pour la découverte et l’enregistrement des différents services.</li>
-        <li>Développement des interfaces frontend avec <strong>Angular</strong> pour les différents services de l’application.</li>
-        <li>Utilisation de <strong>H2</strong> pour les tests et de <strong>MySQL</strong> pour l’environnement de production.</li>
+        <li>Application construite en <strong>architecture microservices</strong> : un service commun en <strong>Node.js / Express</strong> et plusieurs services métier en <strong>Spring Boot</strong>.</li>
+        <li>Quatre services métier : <strong>commandes, stockage, réservation et facturation</strong>.</li>
+        <li>Les services communiquent entre eux avec <strong>RabbitMQ</strong>, et <strong>Eureka</strong> gère leur enregistrement et leur découverte.</li>
+        <li>Interfaces développées en <strong>Angular</strong> pour les différents services.</li>
+        <li><strong>H2</strong> pour les tests, <strong>MySQL</strong> en production.</li>
+        <li>Ensemble de l’application conteneurisé avec <strong>Docker</strong>.</li>
       </ul>
     `,
     metrics: [
@@ -164,11 +166,21 @@ export class ProjetsComponent {
       { label: 'Communication', value: 'RabbitMQ' },
       { label: 'Découverte', value: 'Eureka' },
     ],
-    tags: ['Angular', 'Node.js', 'Spring Boot', 'RabbitMQ', 'Eureka', 'Docker', 'H2', 'MySQL'],
+    tags: [
+      'Spring Boot',
+      'Node.js',
+      'Express',
+      'Angular',
+      'RabbitMQ',
+      'Eureka',
+      'Docker',
+      'MySQL',
+      'H2',
+    ],
     status: 'Microservices • RabbitMQ • Eureka • Docker',
-    repoUrl: 'https://github.com/',
+    repoUrl: 'https://github.com/medrezgui/FoodJoy', // TODO : lien réel du dépôt
     media: [
-      // Fichiers dans public/projets/resto/ (vérifiez que les noms existent exactement)
+      // Fichiers dans public/projets/resto/
       { type: 'image', src: 'projets/resto/gastroflow-capture.png' },
       { type: 'image', src: 'projets/resto/gastroflow-app-1.png' },
       { type: 'image', src: 'projets/resto/gastroflow-app-2.1.png' },
@@ -206,6 +218,7 @@ export class ProjetsComponent {
 
   /* ---------- Détails dépliables ---------- */
   readonly expanded = signal<Record<string, boolean>>({});
+  readonly expandedTags = signal<Record<string, boolean>>({});
 
   isOpen(key: string): boolean {
     return !!this.expanded()[key];
@@ -213,6 +226,14 @@ export class ProjetsComponent {
 
   toggle(key: string): void {
     this.expanded.update((s) => ({ ...s, [key]: !s[key] }));
+  }
+
+  showAllTags(key: string): boolean {
+    return !!this.expandedTags()[key];
+  }
+
+  toggleTags(key: string): void {
+    this.expandedTags.update((s) => ({ ...s, [key]: !s[key] }));
   }
 
   get projects(): Project[] {
